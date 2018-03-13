@@ -12,13 +12,13 @@ def optimal_sequence(n):
         if (i%3 == 0):
             a[i] = min(1+a[i//3], a[i])
 #    tracing steps back
-    while (n>1):
+    while n > 1:
         sequence.append(n)
-        if (a[n-1] == a[n]-1):
+        if a[n-1] == a[n]-1:
             n = n-1
-        elif (n%2 == 0 and (a[n//2] == a[n]-1)):
+        elif n%2 == 0 and (a[n//2] == a[n]-1):
             n = n/2		
-        elif (n%3 == 0 and (a[n//3] == a[n]-1)):
+        elif n%3 == 0 and (a[n//3] == a[n]-1):
             n = n/3
     sequence.append(1)
     return reversed(sequence)

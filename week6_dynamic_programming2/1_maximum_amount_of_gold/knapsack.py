@@ -2,12 +2,14 @@
 import sys
 
 def optimal_weight(W, w):
-    # write your code here
-    result = 0
-    for x in w:
-        if result + x <= W:
-            result = result + x
-    return result
+    r = [0]* (W+1)
+    for i in range(len(w)):
+        for j in range(W, w[i]-1, -1):
+            r[j] = max(r[j], r[j - w[i]] + w[i])
+    
+    return r[W]
+            
+    
 
 if __name__ == '__main__':
     input = sys.stdin.read()

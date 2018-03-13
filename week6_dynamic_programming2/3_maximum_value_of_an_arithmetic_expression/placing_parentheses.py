@@ -1,5 +1,5 @@
 # Uses python3
-def evalt(a, b, op):
+def operation(a, b, op):
     if op == '+':
         return a + b
     elif op == '-':
@@ -15,10 +15,10 @@ def MinMax(i, j, op, m, M):
     m_max = -np.inf
 
     for k in range(i, j):
-        a = evalt(M[i][k], M[k+1][j], op[k])
-        b = evalt(M[i][k], m[k+1][j], op[k])
-        c = evalt(m[i][k], M[k+1][j], op[k])
-        d = evalt(m[i][k], m[k+1][j], op[k])
+        a = operation(M[i][k], M[k+1][j], op[k])
+        b = operation(M[i][k], m[k+1][j], op[k])
+        c = operation(m[i][k], M[k+1][j], op[k])
+        d = operation(m[i][k], m[k+1][j], op[k])
         
         m_min = min(m_min, a, b, c, d)
         m_max = max(m_max, a, b, c, d)
@@ -26,16 +26,20 @@ def MinMax(i, j, op, m, M):
     return(m_min, m_max)      
         
 def get_maximum_value(dataset):
+    
+#    separatign the operators and the digits
     op = dataset[1 : len(dataset) : 2]
-    digits = dataset[0 : len(dataset)+1 : 2]
+    dig = dataset[0 : len(dataset)+1 : 2]
 
-    n = len(digits)
-    m = [[0]*n for _ in range(n)]
-    M = [[0]*n for _ in range(n)]
+#    initialise the matrix
+    n = len(dig)
+    m = [[0]*n for _ in range(n)] #min
+    M = [[0]*n for _ in range(n)] #max
 
+#   diagonal assigned as the literals
     for i in range(n):
-        m[i][i] = int(digits[i])
-        M[i][i] = int(digits[i])
+        m[i][i] = int(dig[i])
+        M[i][i] = int(dig[i])
 
     for s in range(1, n):
         for i in range(n-s):
